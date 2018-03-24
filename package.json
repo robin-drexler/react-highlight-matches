@@ -1,5 +1,5 @@
 {
-  "name": "react-highlight-matches",
+  "name": "react-highlight-tags",
   "version": "1.0.0-alpha.1",
   "main": "dist/index.js",
   "main:esnext": "dist/index.m.js",
@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "build":
-      "microbundle ./HighlightMatches.js -o dist/index.js --compress=false --jsx=React.createElement"
+      "microbundle ./index.js -o dist/index.js --compress=false --jsx=React.createElement"
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",

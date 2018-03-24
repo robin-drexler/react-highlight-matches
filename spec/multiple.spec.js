@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-testing-library';
-import HightlightMatches from '../HighlightMatches';
+import HightlightTags from '../index';
 
 describe('multiple tags', () => {
   it('surrounds matches with component', () => {
@@ -15,7 +15,7 @@ describe('multiple tags', () => {
     bar
     `;
     const { container } = render(
-      <HightlightMatches
+      <HightlightTags
         text={text}
         tags={[
           {
@@ -53,7 +53,7 @@ describe('multiple tags', () => {
     The <phrase>World</phrase> is an awesome place! :)
     `;
     const { container } = render(
-      <HightlightMatches text={text} tag="foo" component={'h1'} />
+      <HightlightTags text={text} tag="foo" component={'h1'} />
     );
 
     expect(container.querySelectorAll('h1').length).toBe(0);
@@ -70,7 +70,7 @@ describe('multiple tags', () => {
     The World is an awesome place! :)
     `;
     const { container } = render(
-      <HightlightMatches
+      <HightlightTags
         text={text}
         tag="phrase"
         render={({ text, key }) => {

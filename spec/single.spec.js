@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-testing-library';
-import HightlightMatches from '../HighlightMatches';
+import HighlightTags from '../index';
 
 describe('highlight matches', () => {
   it('surrounds matches with component', () => {
@@ -13,7 +13,7 @@ describe('highlight matches', () => {
     The World is an awesome place! :)
     `;
     const { container } = render(
-      <HightlightMatches text={text} tag="phrase" component={'h1'} />
+      <HighlightTags text={text} tag="phrase" component={'h1'} />
     );
 
     expect(container.querySelectorAll('h1').length).toBe(2);
@@ -28,7 +28,7 @@ describe('highlight matches', () => {
     The <phrase>World</phrase> is an awesome place! :)
     `;
     const { container } = render(
-      <HightlightMatches text={text} tag="foo" component={'h1'} />
+      <HighlightTags text={text} tag="foo" component={'h1'} />
     );
 
     expect(container.querySelectorAll('h1').length).toBe(0);
@@ -45,7 +45,7 @@ describe('highlight matches', () => {
     The World is an awesome place! :)
     `;
     const { container } = render(
-      <HightlightMatches
+      <HighlightTags
         text={text}
         tag="phrase"
         render={({ text, key }) => {
@@ -62,7 +62,7 @@ describe('highlight matches', () => {
 
   it('allows to override container component', () => {
     const { container } = render(
-      <HightlightMatches text="foo" containerComponent="section" />
+      <HighlightTags text="foo" containerComponent="section" />
     );
 
     expect(container.querySelector('section').textContent).toBe('foo');
