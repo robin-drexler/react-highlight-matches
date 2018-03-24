@@ -8,10 +8,10 @@ class HighlightMatches extends PureComponent {
   render() {
     const {
       tag,
-      Component,
+      component,
       text,
       render,
-      tags = [{ tag, Component, render }]
+      tags = [{ tag, component, render }]
     } = this.props;
 
     const tagStrings = tags.map(({ tag }) => tag).join('|');
@@ -30,7 +30,7 @@ class HighlightMatches extends PureComponent {
         return split;
       }
 
-      const { Component, render, tag } = matchingTag;
+      const { component: Component, render, tag } = matchingTag;
       const replaceRegex = new RegExp(`<${tag}>(.*?)</${tag}>`, 'g');
       const text = split.replace(replaceRegex, '$1');
 
@@ -51,11 +51,11 @@ HighlightMatches.propTypes = {
   tags: PropTypes.arrayOf(
     PropTypes.shape({
       tag: PropTypes.string.isRequired,
-      Component: PropTypes.any,
+      component: PropTypes.any,
       render: PropTypes.func
     })
   ),
-  Component: PropTypes.any,
+  component: PropTypes.any,
   render: PropTypes.func
 };
 

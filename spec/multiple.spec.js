@@ -20,7 +20,7 @@ describe('multiple tags', () => {
         tags={[
           {
             tag: 'phrase',
-            Component: 'h1'
+            component: 'h1'
           },
           {
             tag: 'test',
@@ -28,7 +28,7 @@ describe('multiple tags', () => {
           },
           {
             tag: 'foo',
-            Component: 'h3'
+            component: 'h3'
           }
         ]}
       />
@@ -53,7 +53,7 @@ describe('multiple tags', () => {
     The <phrase>World</phrase> is an awesome place! :)
     `;
     const { container } = render(
-      <HightlightMatches text={text} tag="foo" Component={'h1'} />
+      <HightlightMatches text={text} tag="foo" component={'h1'} />
     );
 
     expect(container.querySelectorAll('h1').length).toBe(0);
