@@ -6,7 +6,7 @@ class HighlightMatches extends PureComponent {
     super(props);
   }
   render() {
-    const { tag, SurroundWithComponent, text, render } = this.props;
+    const { tag, Component, text, render } = this.props;
     const matchRegex = new RegExp(`(<${tag}>.*?</${tag}>)`, 'g');
     const replaceRegex = new RegExp(`<${tag}>(.*?)</${tag}>`, 'g');
 
@@ -20,7 +20,7 @@ class HighlightMatches extends PureComponent {
         return render({ text, key: i });
       }
 
-      return <SurroundWithComponent key={i}>{text}</SurroundWithComponent>;
+      return <Component key={i}>{text}</Component>;
     });
 
     return <span>{result}</span>;
@@ -30,7 +30,7 @@ class HighlightMatches extends PureComponent {
 HighlightMatches.propTypes = {
   text: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
-  SurroundWithComponent: PropTypes.node,
+  Component: PropTypes.node,
   render: PropTypes.func
 };
 

@@ -13,11 +13,7 @@ describe('highlight matches', () => {
     The World is an awesome place! :)
     `;
     const { container } = render(
-      <HightlightMatches
-        text={text}
-        tag="phrase"
-        SurroundWithComponent={'h1'}
-      />
+      <HightlightMatches text={text} tag="phrase" Component={'h1'} />
     );
 
     expect(container.querySelectorAll('h1').length).toBe(2);
@@ -32,7 +28,7 @@ describe('highlight matches', () => {
     The <phrase>World</phrase> is an awesome place! :)
     `;
     const { container } = render(
-      <HightlightMatches text={text} tag="foo" SurroundWithComponent={'h1'} />
+      <HightlightMatches text={text} tag="foo" Component={'h1'} />
     );
 
     expect(container.querySelectorAll('h1').length).toBe(0);
