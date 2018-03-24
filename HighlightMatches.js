@@ -11,9 +11,13 @@ class HighlightMatches extends PureComponent {
       component,
       text,
       render,
-      tags = [{ tag, component, render }]
+      tags = [{ tag, component, render }],
+      containerComponent: ContainerComponent = 'span'
     } = this.props;
 
+    // first, we need to create a regex that will split by all tags
+    // it is needed, because we only can operate on the array once
+    // otherwise the order could get messed up
     const tagStrings = tags.map(({ tag }) => tag).join('|');
     const matchRegex = new RegExp(
       `(<(?:${tagStrings})>.*?</(?:${tagStrings})>)`,
@@ -41,7 +45,7 @@ class HighlightMatches extends PureComponent {
       return <Component key={i}>{text}</Component>;
     });
 
-    return <span>{result}</span>;
+    return <ContainerComponent>{result}</ContainerComponent>;
   }
 }
 

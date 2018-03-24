@@ -59,4 +59,12 @@ describe('highlight matches', () => {
     expect(container.querySelectorAll('h1')[1].textContent).toBe('World');
     expect(container.textContent).toBe(exptectedText);
   });
+
+  it('allows to override container component', () => {
+    const { container } = render(
+      <HightlightMatches text="foo" containerComponent="section" />
+    );
+
+    expect(container.querySelector('section').textContent).toBe('foo');
+  });
 });
