@@ -1,7 +1,7 @@
-const React = require('React');
-const PropTypes = require('prop-types');
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
-class HighlightMatches extends React.Component {
+class HighlightMatches extends PureComponent {
   constructor(props) {
     super(props);
   }

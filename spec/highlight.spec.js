@@ -1,6 +1,6 @@
-const React = require('React');
-const { mount } = require('enzyme');
-const HightlightMatches = require('../HighlightMatches');
+import React from 'react';
+import { render } from 'react-testing-library';
+import HightlightMatches from '../HighlightMatches';
 
 describe('highlight matches', () => {
   it('surrounds matches with component', () => {
@@ -12,7 +12,7 @@ describe('highlight matches', () => {
     
     The World is an awesome place! :)
     `;
-    const rendered = mount(
+    const { container } = render(
       <HightlightMatches
         text={text}
         tag="phrase"
@@ -20,10 +20,10 @@ describe('highlight matches', () => {
       />
     );
 
-    expect(rendered.find('h1').length).toBe(2);
-    expect(rendered.find('h1').at(0).text()).toBe('world');
-    expect(rendered.find('h1').at(1).text()).toBe('World');
-    expect(rendered.text()).toBe(exptectedText);
+    expect(container.querySelectorAll('h1').length).toBe(2);
+    expect(container.querySelectorAll('h1')[0].textContent).toBe('world');
+    expect(container.querySelectorAll('h1')[1].textContent).toBe('World');
+    expect(container.textContent).toBe(exptectedText);
   });
 
   it('works when nothing matches', () => {
@@ -31,11 +31,11 @@ describe('highlight matches', () => {
     
     The <phrase>World</phrase> is an awesome place! :)
     `;
-    const rendered = mount(
+    const { container } = render(
       <HightlightMatches text={text} tag="foo" SurroundWithComponent={'h1'} />
     );
 
-    expect(rendered.find('h1').length).toBe(0);
-    expect(rendered.text()).toBe(text);
+    expect(container.querySelectorAll('h1').length).toBe(0);
+    expect(container.textContent).toBe(text);
   });
 });
