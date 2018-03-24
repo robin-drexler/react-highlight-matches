@@ -6,14 +6,32 @@ class HighlightMatches extends PureComponent {
     super(props);
   }
   render() {
-    const { tag, Component, text, render } = this.props;
-    const matchRegex = new RegExp(`(<${tag}>.*?</${tag}>)`, 'g');
-    const replaceRegex = new RegExp(`<${tag}>(.*?)</${tag}>`, 'g');
+    const {
+      tag,
+      Component,
+      text,
+      render,
+      tags = [{ tag, Component, render }]
+    } = this.props;
+
+    const tagStrings = tags.map(({ tag }) => tag).join('|');
+    const matchRegex = new RegExp(
+      `(<(?:${tagStrings})>.*?</(?:${tagStrings})>)`,
+      'g'
+    );
 
     const result = text.split(matchRegex).map((split, i) => {
-      if (!split.match(matchRegex)) {
+      const matchingTag = tags.find(({ tag }) => {
+        const matchRegex = new RegExp(`(<${tag}>.*?</${tag}>)`, 'g');
+        return Boolean(split.match(matchRegex));
+      });
+
+      if (!matchingTag) {
         return split;
       }
+
+      const { Component, render, tag } = matchingTag;
+      const replaceRegex = new RegExp(`<${tag}>(.*?)</${tag}>`, 'g');
       const text = split.replace(replaceRegex, '$1');
 
       if (typeof render === 'function') {
@@ -29,8 +47,15 @@ class HighlightMatches extends PureComponent {
 
 HighlightMatches.propTypes = {
   text: PropTypes.string.isRequired,
-  tag: PropTypes.string.isRequired,
-  Component: PropTypes.node,
+  tag: PropTypes.string,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      tag: PropTypes.string.isRequired,
+      Component: PropTypes.any,
+      render: PropTypes.func
+    })
+  ),
+  Component: PropTypes.any,
   render: PropTypes.func
 };
 
